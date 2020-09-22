@@ -32,9 +32,6 @@ class Language(models.Model):
 
 class Genre(models.Model):
     class Meta:
-        indexes = [
-            models.Index(fields=['name'], name="genre_name_idx")
-        ]
         verbose_name = _("Genre")
         verbose_name_plural = _("Genres")
         ordering = ["-name"]
@@ -159,11 +156,12 @@ class Book(models.Model):
         help_text=_("Year of publication"),
         null=True
     )
-    genre = models.ManyToManyField(
+    genre = models.ForeignKey(
         Genre,
         verbose_name=_("Genre's Book"),
         help_text=_("Select a genre's book"),
-        blank=True
+        blank=True,
+        on_delete=models.PROTECT
     )
     language = models.ForeignKey(
         Language,
@@ -175,6 +173,9 @@ class Book(models.Model):
 
     def __str__(self):
         return f'{self.author} - {self.title}'
+
+    def get_absolute_url(self):
+        return "/catalog/books/%s/" % self.isbn
 
 
 class BookInstance(models.Model):
