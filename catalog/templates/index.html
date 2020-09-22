@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Библиотека: Главная</title>{% endblock %}
+
+{% block content %}
+<h1>Библиотека: Главная</h1>
+
+  <p>Добро пожаловать в <em>Библиотеку</em></p>
+
+<h2>Информация</h2>
+
+  <p>В библиотеке:</p>
+  <ul>
+    <li><strong>Книги:</strong> {{ count_books }}</li>
+    <li><strong>Экземпляры книг:</strong> {{ count_instances }}</li>
+    <li><strong>Доступно:</strong> {{ count_instances_available }}</li>
+    <li><strong>Авторы:</strong> {{ count_authors }}</li>
+  </ul>
+
+{% endblock %}
